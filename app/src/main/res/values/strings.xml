@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CountryAPI</string>
+    <string name="title_first_screen">Countries of the world</string>
+    <string name="flag_image_country">flag image country</string>
+</resources>
