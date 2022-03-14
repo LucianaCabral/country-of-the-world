@@ -11,12 +11,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcabral.countryapi.R
 import com.lcabral.countryapi.databinding.ActivityCountryBinding
+import com.lcabral.countryapi.model.Country
 import com.lcabral.countryapi.viewmodel.CountryViewModel
 
-class CountryActivity : AppCompatActivity() {
+class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     private lateinit var binding: ActivityCountryBinding
     private lateinit var viewModel: CountryViewModel
-    private val countryAdapter = CountryAdapter()
+    private var countryAdapter = CountryAdapter(this)
+
+    companion object {
+        const val EXTRA_COUNTRY = "EXTRA_MOVIE"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +33,13 @@ class CountryActivity : AppCompatActivity() {
         initUI()
         setupViewModel()
         setupObservers()
-        onClick(country = null)
+
     }
 
     private fun initUI() {
         binding.myReciclerview.apply {
-            layoutManager = LinearLayoutManager(context)
             adapter = countryAdapter
+            layoutManager = LinearLayoutManager(context)
         }
     }
 
@@ -46,21 +51,31 @@ class CountryActivity : AppCompatActivity() {
         viewModel.fetchCountries()
         viewModel.items.observe(this, Observer { countries ->
             countries?.let {
-                countryAdapter.update(it)
+//                countryAdapter.update(it)
+                updateList(it)
                 makeText(this, "success", LENGTH_LONG).show()
                 loadingVisibility(false)
             }
         })
     }
 
+    private fun updateList(items: List<Country>) {
+        countryAdapter.updateAdapter(items)
+    }
+
     private fun loadingVisibility(isLoading: Boolean) {
         binding.progressbar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    fun onClick(country: View?) {
-       country?.setOnClickListener {
-            val intent = Intent(this,CountryDetailActivity::class.java)
-            startActivity(intent)
-        }
+    override fun itemClickCountry(country: Country) {
+        extras(country)
+    }
+
+    private fun extras(country: Country) {
+        val intent = Intent(this, CountryDetailActivity::class.java)
+        intent.putExtra(EXTRA_COUNTRY,country.name)
+        intent.putExtra(EXTRA_COUNTRY,country.region)
+        intent.putExtra(EXTRA_COUNTRY,country.flag)
+        startActivity(intent)
     }
 }

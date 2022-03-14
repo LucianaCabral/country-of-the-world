@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.lcabral.countryapi.databinding.ItemListBinding
 import com.lcabral.countryapi.model.Country
 
-class CountryAdapter: RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
+class CountryAdapter(private val onItemClickListenerCountry: ItemClickListenerCountry): RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
 
     private val items: ArrayList<Country> = arrayListOf()
 
@@ -18,7 +18,7 @@ class CountryAdapter: RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun update(countries: List<Country>) {
+    fun updateAdapter(countries: List<Country>) {
         items.clear()
         items.addAll(countries)
         notifyDataSetChanged()
@@ -26,7 +26,7 @@ class CountryAdapter: RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val country = items[position]
-        holder.bind(country)
+        holder.bind(country, onItemClickListenerCountry)
 //        holder.bind(items[position])
     }
 
@@ -34,9 +34,9 @@ class CountryAdapter: RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(country: Country) {
+        fun bind(country: Country,onItemClickListenerCountry: ItemClickListenerCountry) {
             itemView.apply {
-//                setOnClickListener { listener.clickItemCountry(country) }
+                setOnClickListener { onItemClickListenerCountry.itemClickCountry(country) }
                 binding.countryName.text = country.name
                 binding.region.text = country.region
                 Glide.with(binding.imgFlag.context).load(country.flags.png).into(binding.imgFlag)
