@@ -5,6 +5,7 @@ import com.lcabral.countryapi.data.Currency
 import com.lcabral.countryapi.data.Flags
 
 data class Country(
+    val id: Int?,
     @SerializedName("name")
     val name: String? = "",
     val flags: Flags,
