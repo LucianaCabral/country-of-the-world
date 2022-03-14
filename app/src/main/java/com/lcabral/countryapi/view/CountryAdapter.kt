@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.lcabral.countryapi.R
 import com.lcabral.countryapi.databinding.ItemListBinding
 import com.lcabral.countryapi.model.Country
 
@@ -38,7 +39,7 @@ class CountryAdapter(private val onItemClickListenerCountry: ItemClickListenerCo
             itemView.apply {
                 setOnClickListener { onItemClickListenerCountry.itemClickCountry(country) }
                 binding.countryName.text = country.name
-                binding.region.text = country.region
+                binding.region.text = "region: ${country.region}"
                 Glide.with(binding.imgFlag.context).load(country.flags.png).into(binding.imgFlag)
             }
         }

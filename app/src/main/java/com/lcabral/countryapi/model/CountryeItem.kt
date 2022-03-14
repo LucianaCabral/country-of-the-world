@@ -1,4 +1,4 @@
-package com.lcabral.countryapi.data
+package com.lcabral.countryapi.model
 
 data class CountryeItem(
     val area: Double,

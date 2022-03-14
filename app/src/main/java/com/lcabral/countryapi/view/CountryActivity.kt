@@ -3,6 +3,7 @@ package com.lcabral.countryapi.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast.LENGTH_LONG
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcabral.countryapi.R
 import com.lcabral.countryapi.databinding.ActivityCountryBinding
 import com.lcabral.countryapi.model.Country
+import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_AREA
+import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_CAPITAL
+import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_CURRENCY_NAM
+import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_FLAG
+import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_FLAGS
+import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_NAME
+import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_POPULATION
+import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_REGION
 import com.lcabral.countryapi.viewmodel.CountryViewModel
 
 class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
@@ -20,7 +29,7 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     private var countryAdapter = CountryAdapter(this)
 
     companion object {
-        const val EXTRA_COUNTRY = "EXTRA_MOVIE"
+        const val EXTRA_COUNTRY = "EXTRA_COUNTRY"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +38,7 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
         val view = binding.root
         setContentView(view)
         title = getString(R.string.title_first_screen)
+
 
         initUI()
         setupViewModel()
@@ -73,9 +83,17 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
 
     private fun extras(country: Country) {
         val intent = Intent(this, CountryDetailActivity::class.java)
-        intent.putExtra(EXTRA_COUNTRY,country.name)
-        intent.putExtra(EXTRA_COUNTRY,country.region)
-        intent.putExtra(EXTRA_COUNTRY,country.flag)
-        startActivity(intent)
+        country.apply {
+            intent.putExtra(EXTRA_COUNTRY,country)
+            intent.putExtra(EXTRA_FLAGS, flags.svg)
+            intent.putExtra(EXTRA_NAME, name)
+            intent.putExtra(EXTRA_FLAG, flag)
+            intent.putExtra(EXTRA_CAPITAL, capital)
+            intent.putExtra(EXTRA_POPULATION, population)
+            intent.putExtra(EXTRA_REGION, region)
+            intent.putExtra(EXTRA_CURRENCY_NAM, currency?.name)
+            intent.putExtra(EXTRA_AREA, area)
+            startActivity(intent)
+        }
     }
 }
