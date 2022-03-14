@@ -17,4 +17,6 @@ class CountryService {
         .create(CountryApi::class.java)
 
     suspend fun getCountries(): Response<List<Country>> = retrofitApi.all()
+
+    suspend fun getCountryDetails() : Response<List<Country>> = retrofitApi.all()
 }

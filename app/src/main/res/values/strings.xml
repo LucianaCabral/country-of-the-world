@@ -3,4 +3,12 @@
     <string name="title_first_screen">Countries of the world</string>
     <string name="flag_image_country">flag image country</string>
     <string name="information_of_the_country">Information of the Country</string>
+    <string name="country">Country: $country</string>
+    <string name="countrName">Country:\</string>
+    <string name="urlFlag">url:\</string>
+    <string name="capital">Capital:\</string>
+    <string name="population">Population: \</string>
+    <string name="region">region:\</string>
+    <string name="currency">\currency:\</string>
+    <string name="area">\area:\</string>
 </resources>

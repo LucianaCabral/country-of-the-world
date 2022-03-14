@@ -1,11 +1,11 @@
 package com.lcabral.countryapi.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.lcabral.countryapi.data.Currency
-import com.lcabral.countryapi.data.Flags
+import kotlinx.parcelize.Parcelize
 
-data class Country(
-    val id: Int?,
+@Parcelize
+data class Country @JvmOverloads constructor(
     @SerializedName("name")
     val name: String? = "",
     val flags: Flags,
@@ -13,6 +13,6 @@ data class Country(
     val capital: String? = "",
     val population: Int,
     val region: String? = "",
-    val currency: Currency,
-    val area: Double,
-)
+    val currency: Currency?,
+    val area: Double
+) : Parcelable

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="label">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dimen_24</item>
+        <item name="android:layout_marginTop">@dimen/dimen_2</item>
+        <item name="android:textSize">@dimen/font_size_24</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="labelWithTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dimen_24</item>
+        <item name="android:layout_marginTop">@dimen/dimen_2</item>
+        <item name="android:textSize">@dimen/font_size_24</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+</resources>
