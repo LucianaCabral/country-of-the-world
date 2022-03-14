@@ -16,7 +16,7 @@ import com.lcabral.countryapi.viewmodel.CountryViewModel
 class CountryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCountryBinding
     private lateinit var viewModel: CountryViewModel
-    private val countryAdapter = CountryAdapter(arrayListOf())
+    private val countryAdapter = CountryAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
