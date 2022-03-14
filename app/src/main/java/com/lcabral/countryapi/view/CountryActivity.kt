@@ -39,11 +39,9 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
         setContentView(view)
         title = getString(R.string.title_first_screen)
 
-
         initUI()
         setupViewModel()
         setupObservers()
-
     }
 
     private fun initUI() {
@@ -84,7 +82,7 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     private fun extras(country: Country) {
         val intent = Intent(this, CountryDetailActivity::class.java)
         country.apply {
-            intent.putExtra(EXTRA_COUNTRY,country)
+            intent.putExtra(EXTRA_COUNTRY, country)
             intent.putExtra(EXTRA_FLAGS, flags.svg)
             intent.putExtra(EXTRA_NAME, name)
             intent.putExtra(EXTRA_FLAG, flag)

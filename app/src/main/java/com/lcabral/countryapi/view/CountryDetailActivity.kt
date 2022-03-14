@@ -1,7 +1,6 @@
 package com.lcabral.countryapi.view
 
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -53,29 +52,41 @@ class CountryDetailActivity : AppCompatActivity() {
         viewModel.fetchCountryDetails()
         viewModel.itemDetails.observe(this, Observer { countriesDetails ->
             countriesDetails?.let {
-
             }
         })
-
     }
 
     private fun getExtras() {
         country = intent.getParcelableExtra(EXTRA_COUNTRY)
     }
 
+    private fun initViews() {
+        with(binding) {
+            labelFlag.text.toString()
+            labelCapital.text.toString()
+            labelPopulation.text.toString()
+            labelRegion.text.toString()
+            labelCurrency.text.toString()
+            labelArea.text.toString()
+        }
+    }
+
     private fun initUI() {
         country?.let {
             Glide.with(binding.imgFlag.context).load(country?.flags?.png).into(binding.imgFlag)
+            with(binding) {
+                initViews()
+                countryFlag.text = country?.flag
+                countryName.text = country?.name
+                capital.text = country?.capital
+                population.text = country?.population.toString().format("h/²")
+                region.text = country?.region
+                currency.text = country?.currency?.name.toString()
+                area.text = country?.area.toString()
+            }
         }
-        binding.countryName.text = country?.name
-        binding.countryFlag.text = "url: " + country?.flag
-        binding.capital.text ="capital: " + country?.capital
-        binding.population.text ="population: " + country?.population.toString()
-        binding.region.text ="region: " + country?.region
-        binding.currency.text ="currency: " + country?.currency?.symbol
-        binding.area.text ="area: " + country?.area.toString()
-
     }
+
     private fun setupBackButton() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
