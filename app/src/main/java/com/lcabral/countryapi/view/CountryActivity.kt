@@ -1,11 +1,13 @@
 package com.lcabral.countryapi.view
 
+import android.app.DownloadManager
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
+import android.widget.SearchView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import android.widget.Toast.makeText
@@ -26,13 +28,14 @@ import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_POPULAT
 import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_REGION
 import com.lcabral.countryapi.viewmodel.CountryViewModel
 
-class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
+class CountryActivity : AppCompatActivity(), ItemClickListenerCountry, SearchView.OnQueryTextListener {
     private lateinit var binding: ActivityCountryBinding
     private lateinit var viewModel: CountryViewModel
     private var countryAdapter = CountryAdapter(this)
 
     companion object {
         const val EXTRA_COUNTRY = "EXTRA_COUNTRY"
+        const val TAG = "Tag"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,8 +101,10 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+        val searchView = menu.findItem(R.id.search)?.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -121,4 +126,15 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
             super.onOptionsItemSelected(item)
         }
     }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        Log.e(TAG, "onQueryTextSubmit:$query")
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        Log.e(TAG, "onQueryTextChange: $newText")
+        return false
+    }
+
 }
