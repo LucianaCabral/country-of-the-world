@@ -11,4 +11,8 @@
     <string name="region">region:\</string>
     <string name="currency">\currency:\</string>
     <string name="area">\area:\</string>
+    <string name="search">search</string>
+    <string name="search_">Search</string>
+    <string name="save">save</string>
+    <string name="delete">delete</string>
 </resources>
