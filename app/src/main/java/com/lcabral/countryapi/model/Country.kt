@@ -13,6 +13,7 @@ data class Country @JvmOverloads constructor(
     val capital: String? = "",
     val population: Int,
     val region: String? = "",
+    @SerializedName(" currencies")
     val currency: Currency?,
     val area: Double
 ) : Parcelable

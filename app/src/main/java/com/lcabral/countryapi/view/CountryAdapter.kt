@@ -28,7 +28,6 @@ class CountryAdapter(private val onItemClickListenerCountry: ItemClickListenerCo
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val country = items[position]
         holder.bind(country, onItemClickListenerCountry)
-//        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int = items.size

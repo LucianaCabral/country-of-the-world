@@ -4,13 +4,13 @@
     <string name="flag_image_country">flag image country</string>
     <string name="information_of_the_country">Information of the Country</string>
     <string name="country">Country: $country</string>
-    <string name="countrName">Country:\</string>
+    <string name="countryName">Country:\</string>
     <string name="urlFlag">url:\</string>
     <string name="capital">Capital:\</string>
     <string name="population">Population: \</string>
-    <string name="region">region:\</string>
-    <string name="currency">\currency:\</string>
-    <string name="area">\area:\</string>
+    <string name="region">Region:\</string>
+    <string name="currency">\Currency:\</string>
+    <string name="area">\Area:\</string>
     <string name="search">search</string>
     <string name="search_">Search</string>
     <string name="save">save</string>
