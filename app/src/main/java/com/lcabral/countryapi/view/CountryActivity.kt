@@ -2,8 +2,11 @@ package com.lcabral.countryapi.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
@@ -92,6 +95,30 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
             intent.putExtra(EXTRA_CURRENCY_NAM, currency?.name)
             intent.putExtra(EXTRA_AREA, area)
             startActivity(intent)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.search -> {
+            makeText(this, "Search item", Toast.LENGTH_SHORT).show()
+            true
+        }
+        R.id.save -> {
+            makeText(this, "Save item", Toast.LENGTH_SHORT).show()
+            true
+        }
+
+        R.id.delete -> {
+            makeText(this, "deletes", Toast.LENGTH_SHORT).show()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
         }
     }
 }

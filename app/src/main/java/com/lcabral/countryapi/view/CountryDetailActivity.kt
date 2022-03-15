@@ -10,7 +10,9 @@ import com.lcabral.countryapi.databinding.ActivityCountryDetailBinding
 import com.lcabral.countryapi.model.Country
 import com.lcabral.countryapi.viewmodel.CountryDetailViewModel
 
-class CountryDetailActivity : AppCompatActivity() {
+class CountryDetailActivity : AppCompatActivity()
+
+{
     private lateinit var binding: ActivityCountryDetailBinding
     private lateinit var viewModel: CountryDetailViewModel
 
