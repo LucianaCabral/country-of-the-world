@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="8dp"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="8dp"
     tools:context=".view.CountryDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/img_flag"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_margin="@dimen/dimen_12"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="@dimen/dimen_24"
             android:contentDescription="@string/flag_image_country"
             android:scaleType="fitXY"
@@ -27,104 +25,74 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
-
         <TextView
             android:id="@+id/countryName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="12dp"
             android:textColor="@color/black"
             android:textSize="32sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/img_flag"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/img_flag"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/label_flag"
-            style="@style/labelWithTitle"
-            android:text="@string/urlFlag"
+            android:layout_marginBottom="@dimen/dimen_32"
+            app:layout_constraintTop_toBottomOf="@id/img_flag"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/countryName" />
+            tools:text="@tools:sample/last_names"
+            android:textAppearance="?attr/textAppearanceHeadline6"/>
+        <TextView
+            android:id="@+id/code_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/dimen_12"
+            android:layout_marginBottom="@dimen/dimen_20"
+            app:layout_constraintTop_toBottomOf="@id/img_flag"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAppearance="?attr/textAppearanceHeadline3"
+            tools:text="@tools:sample/last_names" />
 
         <TextView
-            android:id="@+id/country_flag"
+            android:id="@+id/native_name"
             style="@style/label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/label_flag"
-            app:layout_constraintTop_toBottomOf="@id/countryName"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/label_capital"
-            style="@style/labelWithTitle"
-            android:text="@string/capital"
+            android:text="@{country.nativeName}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_flag" />
+            app:layout_constraintTop_toBottomOf="@id/countryName"
+            tools:text="@tools:sample/last_names" />
 
         <TextView
             android:id="@+id/capital"
             style="@style/label"
-            app:layout_constraintStart_toEndOf="@id/label_capital"
-            app:layout_constraintTop_toBottomOf="@id/country_flag"
-            tools:text="@tools:sample/last_names" />
-
-        <TextView
-            android:id="@+id/label_population"
-            style="@style/labelWithTitle"
-            android:text="@string/population"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_capital" />
+            app:layout_constraintTop_toBottomOf="@id/native_name"
+            tools:text="@tools:sample/last_names" />
 
         <TextView
             android:id="@+id/population"
             style="@style/label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/label_population"
-            app:layout_constraintTop_toBottomOf="@id/capital"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/label_region"
-            style="@style/labelWithTitle"
-            android:text="@string/region"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_population" />
+            app:layout_constraintTop_toBottomOf="@id/capital"
+            tools:text="@tools:sample/first_names" />
 
         <TextView
             android:id="@+id/region"
             style="@style/label"
-            app:layout_constraintStart_toEndOf="@id/label_region"
-            app:layout_constraintTop_toBottomOf="@id/population"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/label_currency"
-            style="@style/labelWithTitle"
-            android:text="@string/currency"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_region" />
+            app:layout_constraintTop_toBottomOf="@id/population"
+            tools:text="@tools:sample/last_names" />
 
         <TextView
             android:id="@+id/currency"
             style="@style/label"
-            app:layout_constraintStart_toEndOf="@id/label_currency"
-            app:layout_constraintTop_toBottomOf="@id/label_region"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/label_area"
-            style="@style/labelWithTitle"
-            android:text="@string/area"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_currency" />
+            app:layout_constraintTop_toBottomOf="@id/area"
+            tools:text="@tools:sample/first_names" />
 
         <TextView
             android:id="@+id/area"
             style="@style/label"
-            app:layout_constraintStart_toEndOf="@id/label_area"
-            app:layout_constraintTop_toBottomOf="@id/label_currency"
-            tools:text="@tools:sample/lorem" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/region"
+            tools:text="@tools:sample/last_names" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

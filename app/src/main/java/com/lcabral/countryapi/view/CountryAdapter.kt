@@ -36,10 +36,10 @@ class CountryAdapter(private val onItemClickListenerCountry: ItemClickListenerCo
 
         fun bind(country: Country, onItemClickListenerCountry: ItemClickListenerCountry) {
             itemView.apply {
-                setOnClickListener { onItemClickListenerCountry.itemClickCountry(country) }
+                setOnClickListener { with(onItemClickListenerCountry) { itemClickCountry(country = country) } }
                 with(binding) {
-                    countryName.text = country.name
-                    region.text = country.region
+                    countryName.text = country.name.toString()
+                    region.text = country.region.toString()
                     Glide.with(imgFlag.context).load(country.flags.png)
                         .into(imgFlag)
                 }

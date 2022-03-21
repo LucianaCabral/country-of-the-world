@@ -11,9 +11,12 @@ data class Country @JvmOverloads constructor(
     val flags: Flags,
     val flag: String? = "",
     val capital: String? = "",
-    val population: Int,
+    val population: Long?,
     val region: String? = "",
-    @SerializedName(" currencies")
-    val currency: Currency?,
-    val area: Double
+    @SerializedName("currencies")
+    val currency: List<Currency>,
+    val area: String = "",
+    @SerializedName("alpha2Code")
+    val code:String = "",
+    val nativeName: String? = ""
 ) : Parcelable

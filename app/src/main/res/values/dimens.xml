@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dimen_2">2dp</dimen>
+    <dimen name="dimen_8">8dp</dimen>
     <dimen name="dimen_12">12dp</dimen>
     <dimen name="dimen_20">20dp</dimen>
     <dimen name="dimen_24">24dp</dimen>
+    <dimen name="dimen_32">24dp</dimen>
+    <dimen name="dimen_40">24dp</dimen>
 
     <dimen name="font_size_12">14sp</dimen>
     <dimen name="font_size_16">16sp</dimen>
     <dimen name="font_size_18">16sp</dimen>
+    <dimen name="font_size_20">20sp</dimen>
     <dimen name="font_size_24">24sp</dimen>
 </resources>
