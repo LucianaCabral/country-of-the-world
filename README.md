@@ -9,6 +9,6 @@ Country API
 O layer ViewmModel utilizará  o Architecture Compenet Viewmodel, qwue vai gerenciaro tempo de vida
 através da mudança do ciclo de vida da Activity através da injeção usando o provider  que ela traz.
 
-![img_1.png](img_1.png)
+<img src="img.png" widt="200" height="300">
 ![img_2.png](img_2.png)
 ![img_3.png](img_3.png)
