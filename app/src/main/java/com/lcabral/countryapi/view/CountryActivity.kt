@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
 import android.widget.SearchView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcabral.countryapi.R
 import com.lcabral.countryapi.databinding.ActivityCountryBinding
 import com.lcabral.countryapi.model.Country
-import com.lcabral.countryapi.model.Currency
 import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_AREA
 import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_CAPITAL
 import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_CODE
@@ -47,7 +47,6 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
 
         initUI()
         setupViewModel()
-        setupObservers()
     }
 
     private fun initUI() {
@@ -58,19 +57,30 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     }
 
     private fun setupViewModel() {
-        viewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
+        this.viewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setupObservers()
     }
 
     private fun setupObservers() {
-        viewModel.fetchCountries()
         viewModel.items.observe(this, Observer { countries ->
             countries?.let {
-//                countryAdapter.update(it)
-                updateList(it)
-                makeText(this, "success", LENGTH_LONG).show()
-                loadingVisibility(false)
+                if (countries.isNotEmpty()) {
+                    updateList(it)
+                    Toast.makeText(this, "success", LENGTH_LONG).show()
+                    loadingVisibility(false)
+                }
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchCountries()
     }
 
     private fun updateList(items: List<Country>) {
@@ -103,10 +113,6 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.search_action-> {
-            makeText(this, "Search item", Toast.LENGTH_SHORT).show()
-            true
-        }
         R.id.save -> {
             makeText(this, "Save item", Toast.LENGTH_SHORT).show()
             true
@@ -124,25 +130,23 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
 
-        val search = menu.findItem(R.id.search_action)
-        val searchView = search?.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-//        searchView?.setOnQueryTextListener(this)
+        val searchItem: MenuItem = menu.findItem(R.id.search_action)
+        val searchView = searchItem.actionView as SearchView
 
+        searchView.imeOptions = IME_ACTION_DONE
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                countryAdapter.filter.filter(newText)
+                return false
+            }
+        })
         return true
     }
-
-
-//    override fun onQueryTextSubmit(query: String?): Boolean {
-//        Log.e(TAG, "onQueryTextSubmit:$query")
-//        return true
-//    }
-//
-//    override fun onQueryTextChange(newText: String?): Boolean {
-//        Log.e(TAG, "onQueryTextChange: $newText")
-//        return false
-//    }
-
 }
 
 

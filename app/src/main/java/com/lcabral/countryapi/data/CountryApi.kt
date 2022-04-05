@@ -12,7 +12,4 @@ interface CountryApi {
 
     @GET("all?fields=name")
     suspend fun getAllCountries() : List<Country>
-
-    @GET("name/{country}?fulltext=true")
-    suspend fun getCountryDetails(@Path("Country") country: String): List<CountryApiDetails>
 }
