@@ -10,5 +10,5 @@ O layer ViewmModel utilizará  o Architecture Compenet Viewmodel, qwue vai geren
 através da mudança do ciclo de vida da Activity através da injeção usando o provider  que ela traz.
 
 <img src="img.png" widt="200" height="300">
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
+<img src="img_2.png" widt="200" height="300">
+<img src="img_3.png" widt="200" height="300">
