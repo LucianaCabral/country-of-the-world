@@ -9,13 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lcabral.countryapi.databinding.ItemListBinding
 import com.lcabral.countryapi.model.Country
-import java.util.*
-import kotlin.collections.ArrayList
 
 class CountryAdapter(private val onItemClickListenerCountry: ItemClickListenerCountry) :
     RecyclerView.Adapter<CountryAdapter.ViewHolder>(), Filterable {
 
     private var items: ArrayList<Country> = arrayListOf()
+
+    var countryFilterList = items
+
+    init {
+        countryFilterList = ArrayList(items)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -51,44 +55,71 @@ class CountryAdapter(private val onItemClickListenerCountry: ItemClickListenerCo
         }
     }
 
-    private val countryFilter: Filter = object : Filter() {
-        init {
-            items = ArrayList(items)
-        }
-
-        override fun performFiltering(constrait: CharSequence?): FilterResults {
-            val filteredList: MutableList<Country> = ArrayList()
-            if (constrait == null || constrait.isEmpty()) {
-                filteredList += items
-            } else {
-                val filterPattern =
-                    constrait.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
-                for (item in items) {
-                    if (item.name?.lowercase(Locale.getDefault())
-                            ?.contains(filterPattern) == true
-                    ) {
-                        filteredList.add(item)
-                    }
-                }
-            }
-
-            val results = FilterResults()
-            results.values = filteredList
-            return results
-        }
-
-        override fun publishResults(constrait: CharSequence?, results: FilterResults?) {
-            items.clear()
-            if (results != null) {
-                items.addAll(results.values as List<Country>)
-            }
-            notifyDataSetChanged()
-        }
-    }
+//    private val countryFilter: Filter = object : Filter() {
+//        init {
+//            items = ArrayList(items)
+//        }
+//
+//        override fun performFiltering(constrait: CharSequence?): FilterResults {
+//            val filteredList: MutableList<Country> = ArrayList()
+//            if (constrait == null || constrait.isEmpty()) {
+//                filteredList += items
+//            } else {
+//                val filterPattern =
+//                    constrait.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
+//                for (item in items) {
+//                    if (item.name?.lowercase(Locale.getDefault())
+//                            ?.contains(filterPattern) == true
+//                    ) {
+//                        filteredList.add(item)
+//                    }
+//                }
+//            }
+//
+//            val results = FilterResults()
+//            results.values = filteredList
+//            return results
+//        }
+//
+//        override fun publishResults(constrait: CharSequence?, results: FilterResults?) {
+//            items.clear()
+//            if (results != null) {
+//                items.addAll(results.values as List<Country>)
+//            }
+//            notifyDataSetChanged()
+//        }
+//    }
 
     override fun getFilter(): Filter {
-        countryFilter.convertResultToString(items)
-        return countryFilter
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults? {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    countryFilterList = items as ArrayList<Country>
+                } else {
+                    val resultList = ArrayList<Country>()
+                    for (item in items) {
+                        if (item.name?.lowercase()
+                                ?.contains(constraint.toString().lowercase()) == true
+                        ) {
+                            resultList.add(item)
+                        }
+                    }
+                    countryFilterList = resultList
+                }
+                        val filterResults = FilterResults()
+                        filterResults.values = countryFilterList
+                        return filterResults
+                    }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                countryFilterList = results?.values as ArrayList<Country>
+                notifyDataSetChanged()
+            }
+        }
+//        countryFilter.convertResultToString(items)
+//        return countryFilter
     }
 }
 

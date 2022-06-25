@@ -15,8 +15,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcabral.countryapi.R
+import com.lcabral.countryapi.data.CountryApi
+import com.lcabral.countryapi.data.CountryService
 import com.lcabral.countryapi.databinding.ActivityCountryBinding
 import com.lcabral.countryapi.model.Country
+import com.lcabral.countryapi.repository.CountryRepository
 import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_AREA
 import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_CAPITAL
 import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_CODE
@@ -27,11 +30,13 @@ import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_NATIVE_
 import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_POPULATION
 import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_REGION
 import com.lcabral.countryapi.viewmodel.CountryViewModel
+import com.lcabral.countryapi.viewmodel.CountryViewModelFactory
 
 class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     private lateinit var binding: ActivityCountryBinding
     private lateinit var viewModel: CountryViewModel
     private var countryAdapter = CountryAdapter(this)
+    private val countryService = CountryService()
 
     companion object {
         const val EXTRA_COUNTRY = "EXTRA_COUNTRY"
@@ -57,8 +62,8 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     }
 
     private fun setupViewModel() {
-        this.viewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
-
+        this.viewModel = ViewModelProvider(
+            this, CountryViewModelFactory(CountryRepository(countryService)))[CountryViewModel::class.java]
     }
 
     override fun onStart() {
@@ -80,7 +85,7 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchCountries()
+        viewModel.init()
     }
 
     private fun updateList(items: List<Country>) {
@@ -135,18 +140,48 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
 
         searchView.imeOptions = IME_ACTION_DONE
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
             override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+                return true
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                countryAdapter.filter.filter(newText)
-                return false
+            override fun onQueryTextChange(query: String?): Boolean {
+                countryAdapter.filter.filter(query)
+                return true
             }
         })
-        return true
+//       searchItem.setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
+//           override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+//               countryAdapter.filter.filter("")
+//               makeText(this@CountryActivity, "Action Collapse", Toast.LENGTH_SHORT).show()
+//               return true
+//           }
+//
+//           override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+//               makeText(this@CountryActivity, "Action Expand", Toast.LENGTH_SHORT).show()
+//               return true
+//           }
+//    })
+        return super.onCreateOptionsMenu(menu)
     }
+
+//    private fun getCountries(): MutableList<Country> {
+//        val mdList = mutableListOf<Country>()
+//        for(countryISO in Locale.getISOCountries()) {
+//            val locale = Locale("", countryISO)
+//            if(locale.displayCountry.isNotEmpty()) {
+//                mdList.add(Country(locale.displayCountry + countryFlag(countryISO)))
+//            }
+//        }
+//        return mdList
+//    }
+//
+//    \AQAW\\\\\\\\\\\qaaaaaw
+//        val flagOffset = 0x1F1E6
+//        val asciiOffset = 0x41
+//        val firstChar = Character.codePointAt(countryCode, 0) - asciiOffset + flagOffset
+//        val secondChar = Character.codePointAt(countryCode, 1) - asciiOffset + flagOffset
+//        return (String(Character.toChars(firstChar)) + String(Character.toChars(secondChar)))
+//    }
 }
 
 

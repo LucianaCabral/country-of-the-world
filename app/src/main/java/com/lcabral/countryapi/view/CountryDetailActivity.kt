@@ -6,16 +6,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.lcabral.countryapi.R
+import com.lcabral.countryapi.data.CountryService
 import com.lcabral.countryapi.databinding.ActivityCountryDetailBinding
 import com.lcabral.countryapi.model.Country
+import com.lcabral.countryapi.repository.CountryDetailsRepository
 import com.lcabral.countryapi.viewmodel.CountryDetailViewModel
+import com.lcabral.countryapi.viewmodel.CountryDetailsViewModelFactory
 import java.text.NumberFormat
 import java.util.*
 
 class CountryDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCountryDetailBinding
-    private lateinit var viewModel: CountryDetailViewModel
+    private lateinit var countryDetailsViewModel: CountryDetailViewModel
     private var country: Country? = null
+    private val countryService = CountryService()
 
     companion object {
         const val EXTRA_COUNTRY: String = "EXTRA_COUNTRY"
@@ -46,13 +50,20 @@ class CountryDetailActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        viewModel = ViewModelProvider(this)[CountryDetailViewModel::class.java]
-        viewModel.init()
+        this.countryDetailsViewModel = ViewModelProvider(
+            this, CountryDetailsViewModelFactory(
+                countryDetailsRepository = CountryDetailsRepository(
+                    countryService)))[CountryDetailViewModel::class.java]
+    }
+
+    override fun onResume() {
+        super.onResume()
+        countryDetailsViewModel.init()
     }
 
     private fun setupObservers() {
-        viewModel.fetchCountryDetails()
-        viewModel.itemDetails.observe(this) { countriesDetails ->
+        countryDetailsViewModel.fetchCountryDetails()
+        countryDetailsViewModel.itemDetails.observe(this) { countriesDetails ->
             countriesDetails?.let {
             }
         }
@@ -82,8 +93,10 @@ class CountryDetailActivity : AppCompatActivity() {
             region.text = String.format(resources.getString(R.string.region_label), country?.region)
             area.text = String.format(resources.getString(R.string.area_label), country?.area)
 
-            currency.text = String.format(resources.getString(R.string.currency_label),
-                    country?.currency?.map { it.code }?.joinToString())
+            currency.text = String.format(
+                resources.getString(R.string.currency_label),
+                country?.currency?.map { it.code }?.joinToString()
+            )
         }
     }
 
