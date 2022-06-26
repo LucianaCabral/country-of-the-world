@@ -17,4 +17,4 @@ Componentes utilizados:
   
 <img src="img.png" widt="200" height="300">
 <img src="img_2.png" widt="200" height="300">
-<img src="img_3.png" widt="200" height="300">
+<img src="image_3.png" widt="200" height="300">
