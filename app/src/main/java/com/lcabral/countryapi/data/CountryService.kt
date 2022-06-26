@@ -10,13 +10,15 @@ class CountryService {
         const val BASE_URL = ("https://restcountries.com/v2/")
     }
 
-    private val retrofitApi: CountryApi = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-        .create(CountryApi::class.java)
+    private val countryApi: CountryApi by lazy {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            retrofit.create(CountryApi::class.java)
+    }
 
-    suspend fun getCountries(): Response<List<Country>> = retrofitApi.all()
+    suspend fun getCountries(): Response<List<Country>> = countryApi.all()
 
-    suspend fun getCountryDetails() : Response<List<Country>> = retrofitApi.all()
+    suspend fun getCountryDetails() : Response<List<Country>> = countryApi.all()
 }

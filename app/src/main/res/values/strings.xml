@@ -4,15 +4,25 @@
     <string name="flag_image_country">flag image country</string>
     <string name="information_of_the_country">Information of the Country</string>
     <string name="country">Country: $country</string>
-    <string name="countrName">Country:\</string>
-    <string name="urlFlag">url:\</string>
-    <string name="capital">Capital:\</string>
-    <string name="population">Population: \</string>
-    <string name="region">region:\</string>
-    <string name="currency">\currency:\</string>
-    <string name="area">\area:\</string>
+    <string name="nativeName_label">Native Name: %s</string>
+    <string name="country_label">Country: %s</string>
+    <string name="population_label">Population: %s</string>
+    <string name="region_label">Region: %s</string>
+    <string name="currency_label">Currency code: %s</string>
+    <string name="capital_label">Capital: %s</string>
+    <string name="area_label">Area: %s km²</string>
     <string name="search">search</string>
     <string name="search_">Search</string>
     <string name="save">save</string>
     <string name="delete">delete</string>
+    <string name="search_of_the_country">search of the country</string>
+
+    <string-array name="population_suffices">
+        <item>K</item>
+        <item>M</item>
+        <item>B</item>
+        <item>T</item>
+        <item>P</item>
+        <item>E</item>
+    </string-array>
 </resources>
