@@ -1,4 +1,4 @@
-package com.lcabral.countryapi.view
+package com.lcabral.countryapi.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,29 +12,26 @@ import android.widget.Toast.LENGTH_LONG
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcabral.countryapi.R
-import com.lcabral.countryapi.data.CountryApi
 import com.lcabral.countryapi.data.CountryService
 import com.lcabral.countryapi.databinding.ActivityCountryBinding
 import com.lcabral.countryapi.model.Country
-import com.lcabral.countryapi.repository.CountryRepository
-import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_AREA
-import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_CAPITAL
-import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_CODE
-import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_CURRENCY_NAM
-import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_FLAGS
-import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_NAME
-import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_NATIVE_NAME
-import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_POPULATION
-import com.lcabral.countryapi.view.CountryDetailActivity.Companion.EXTRA_REGION
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_AREA
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CAPITAL
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CODE
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CURRENCY_NAM
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_FLAGS
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_NAME
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_NATIVE_NAME
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_POPULATION
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_REGION
 import com.lcabral.countryapi.viewmodel.CountryViewModel
-import com.lcabral.countryapi.viewmodel.CountryViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     private lateinit var binding: ActivityCountryBinding
-    private lateinit var viewModel: CountryViewModel
+    private val viewModel: CountryViewModel by viewModel()
     private var countryAdapter = CountryAdapter(this)
     private val countryService = CountryService()
 
@@ -51,7 +48,6 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
         title = getString(R.string.title_first_screen)
 
         initUI()
-        setupViewModel()
     }
 
     private fun initUI() {
@@ -59,11 +55,6 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
             adapter = countryAdapter
             layoutManager = LinearLayoutManager(context)
         }
-    }
-
-    private fun setupViewModel() {
-        this.viewModel = ViewModelProvider(
-            this, CountryViewModelFactory(CountryRepository(countryService)))[CountryViewModel::class.java]
     }
 
     override fun onStart() {

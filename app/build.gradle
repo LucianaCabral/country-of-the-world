@@ -31,7 +31,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 }
@@ -48,7 +48,7 @@ dependencies {
 
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"   //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0-native-mt"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
 
     //ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
@@ -64,23 +64,32 @@ dependencies {
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
     testImplementation "android.arch.core:core-testing:1.1.1"
 
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0-native-mt"
+    //Mockk
+    testImplementation "io.mockk:mockk:1.12.1"
+
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test.ext:junit-ktx:1.1.3"
 
-//    // Koin Core features
-//    implementation "io.insert-koin:koin-core:3.2"
-//// Koin Test features
-//    testImplementation "io.insert-koin:koin-test:3.2"
-//// Koin main features for Android
-//    implementation "io.insert-koin:koin-android:3.2"
-//// No more koin-android-viewmodel, koin-android-scope, koin-android-fragment
-//
-//// Java Compatibility
-//    implementation "io.insert-koin:koin-android-compat:3.2"
-//// Jetpack WorkManager
-//    implementation "io.insert-koin:koin-androidx-workmanager:3.2"
-//// Navigation Graph
+    testImplementation "androidx.test:core-ktx:1.4.0"
+
+    testImplementation "org.robolectric:robolectric:4.2.1"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    testImplementation "org.hamcrest:hamcrest-all:1.0.0"
+    // Koin Core features
+    implementation "io.insert-koin:koin-core:2.2.3"
+    implementation "io.insert-koin:koin-android:2.2.3"
+    implementation "io.insert-koin:koin-androidx-scope:2.2.3"
+    implementation "io.insert-koin:koin-androidx-viewmodel:2.2.3"
+
+// Koin Test features
+    testImplementation "io.insert-koin:koin-test:2.2.3"
+
+// Navigation Graph
 //    implementation "io.insert-koin:koin-androidx-navigation:3.2"
 }

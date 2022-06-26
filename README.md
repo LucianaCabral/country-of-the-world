@@ -1,14 +1,20 @@
-Country API
-
-1.Retrofit para fazer requisições  HTTP  para uma AP pública
-2. Coroutines ( Thread leves)  para gerenciar a chamada assíncrona dessa  requisição  HTTPe definir
-    em quias threads devem ser executadas
-   3. ViewModel para separar  a gerencia de estado e buscar informaçôes  da nossa UI
-    4.LiveData par atualizar de forma reativa as inofrmações da tela
-      
-O layer ViewmModel utilizará  o Architecture Compenet Viewmodel, qwue vai gerenciaro tempo de vida
-através da mudança do ciclo de vida da Activity através da injeção usando o provider  que ela traz.
-
+# App Country API
+## Aplicação que coleta dados de uma Api de países disponível no link: ""
+* Lista flags
+* Lista informações de países
+Arquitetura utilizada : MVVM
+Componentes utilizados:   
+* RecyclerView
+* ViewModel para separar  a gerencia de estado e buscar informaçôes  da nossa UI
+  A camada  ViewModel utilizará  o Architecture Compenet Viewmodel, que vai gerenciaro tempo de vida
+  através da mudança do ciclo de vida da Activity através da injeção usando o koin.
+  LiveData para atualizar de forma reativa as informações da tela.
+  Libs utilizadas:
+    * Retrofit para fazer as  requisições HTTP  para uma AP pública.
+* Injeção de dependências com Koin
+* Coroutines para gerenciar a chamada assíncrona dessa  requisição HTTP e definir
+  em quias threads devem ser executadas
+  
 <img src="img.png" widt="200" height="300">
 <img src="img_2.png" widt="200" height="300">
 <img src="img_3.png" widt="200" height="300">

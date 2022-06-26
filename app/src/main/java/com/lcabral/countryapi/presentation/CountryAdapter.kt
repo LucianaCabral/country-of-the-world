@@ -1,4 +1,4 @@
-package com.lcabral.countryapi.view
+package com.lcabral.countryapi.presentation
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

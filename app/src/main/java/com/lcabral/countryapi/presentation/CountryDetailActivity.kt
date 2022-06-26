@@ -1,23 +1,21 @@
-package com.lcabral.countryapi.view
+package com.lcabral.countryapi.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.lcabral.countryapi.R
 import com.lcabral.countryapi.data.CountryService
 import com.lcabral.countryapi.databinding.ActivityCountryDetailBinding
 import com.lcabral.countryapi.model.Country
-import com.lcabral.countryapi.repository.CountryDetailsRepository
 import com.lcabral.countryapi.viewmodel.CountryDetailViewModel
-import com.lcabral.countryapi.viewmodel.CountryDetailsViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.NumberFormat
 import java.util.*
 
 class CountryDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCountryDetailBinding
-    private lateinit var countryDetailsViewModel: CountryDetailViewModel
+    private val countryDetailsViewModel: CountryDetailViewModel by viewModel()
     private var country: Country? = null
     private val countryService = CountryService()
 
@@ -44,16 +42,8 @@ class CountryDetailActivity : AppCompatActivity() {
 
         getExtras()
         initUI()
-        setupViewModel()
         setupObservers()
         this.setupBackButton()
-    }
-
-    private fun setupViewModel() {
-        this.countryDetailsViewModel = ViewModelProvider(
-            this, CountryDetailsViewModelFactory(
-                countryDetailsRepository = CountryDetailsRepository(
-                    countryService)))[CountryDetailViewModel::class.java]
     }
 
     override fun onResume() {

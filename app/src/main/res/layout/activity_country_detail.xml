@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:elevation="8dp"
     app:cardBackgroundColor="@color/white"
-    tools:context=".view.CountryDetailActivity">
+    tools:context=".presentation.CountryDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

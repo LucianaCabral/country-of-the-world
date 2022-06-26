@@ -7,13 +7,13 @@
     android:elevation="8dp"
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true"
-    tools:context=".view.CountryActivity">
+    tools:context=".presentation.CountryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".view.CountryActivity">
+        tools:context=".presentation.CountryActivity">
 
         <ImageView
             android:id="@+id/img_flag"
