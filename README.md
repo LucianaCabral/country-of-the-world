@@ -15,6 +15,4 @@ Componentes utilizados:
 * Coroutines para gerenciar a chamada assíncrona dessa  requisição HTTP e definir
   em quias threads devem ser executadas
   
-<img src="img.png" widt="200" height="300">
-<img src="img_2.png" widt="200" height="300">
-<img src="img_3.png" widt="200" height="300">
+<img src="img.png" widt="200" height="300">  <img src="img_2.png" widt="200" height="300">  <img src="img_3.png" widt="200" height="300">
