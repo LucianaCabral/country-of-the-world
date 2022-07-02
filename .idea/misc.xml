@@ -8,11 +8,11 @@
         <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/drawable/ic_search.xml" value="0.1" />
         <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/drawable/ic_star_rate.xml" value="0.1" />
         <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/layout-v23/activity_country.xml" value="0.1408514492753623" />
-        <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/layout/activity_country.xml" value="0.536" />
+        <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/layout/activity_country.xml" value="0.264" />
         <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/layout/activity_country_detail.xml" value="0.1" />
         <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/layout/item_country.xml" value="0.20208333333333334" />
-        <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/layout/item_list.xml" value="0.2" />
+        <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/layout/item_list.xml" value="0.536" />
         <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/menu-v26/menu.xml" value="0.21501532175689478" />
         <entry key="..\:/Users/englu/AndroidStudioProjects/CountryAPI/app/src/main/res/menu/menu.xml" value="0.1" />
       </map>
@@ -27,7 +27,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.536" />
+        <option name="scale" value="0.264" />
       </ProjectState>
     </option>
   </component>

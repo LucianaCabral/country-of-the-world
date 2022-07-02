@@ -1,6 +1,8 @@
 package com.lcabral.countryapi.di
 
+import com.lcabral.countryapi.data.CountryDataSourceImpl
 import com.lcabral.countryapi.data.CountryService
+import com.lcabral.countryapi.data.usecase.CountryUseCase
 import com.lcabral.countryapi.repository.CountryDetailsRepository
 import com.lcabral.countryapi.repository.CountryRepository
 import com.lcabral.countryapi.viewmodel.CountryDetailViewModel
@@ -10,7 +12,11 @@ import org.koin.dsl.module
 
 val countryModule = module {
     factory {
-        CountryRepository(countryService = CountryService())
+        CountryUseCase(
+            countryRepository = CountryRepository(
+                countryDataSource = CountryDataSourceImpl(countryService = CountryService())
+            )
+        )
     }
 
     factory {
@@ -19,7 +25,7 @@ val countryModule = module {
 
     viewModel {
         CountryViewModel(
-            repository = get()
+            countryUseCase = get()
         )
     }
 
