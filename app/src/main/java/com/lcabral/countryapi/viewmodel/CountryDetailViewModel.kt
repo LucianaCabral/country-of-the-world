@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lcabral.countryapi.model.Country
 import com.lcabral.countryapi.repository.CountryDetailsRepository
+import com.lcabral.countryapi.usecase.CountryDetailsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CountryDetailViewModel(
-    private val countryDetailsRepository: CountryDetailsRepository) : ViewModel() {
+    private val countryDetailsUseCase: CountryDetailsUseCase) : ViewModel() {
     private val _itemsDetails = MutableLiveData<List<Country>>()
 
     val itemDetails: LiveData<List<Country>>
@@ -23,7 +24,7 @@ class CountryDetailViewModel(
 
     fun fetchCountryDetails() {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = countryDetailsRepository.getCountryDetails()
+            val result = countryDetailsUseCase.invoke()
 
             if (result.isSuccessful) {
                 withContext(Dispatchers.Main) {
