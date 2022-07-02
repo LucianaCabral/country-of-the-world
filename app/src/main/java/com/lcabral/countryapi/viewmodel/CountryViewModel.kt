@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lcabral.countryapi.data.usecase.CountryUseCase
+import com.lcabral.countryapi.usecase.CountryUseCase
 import com.lcabral.countryapi.model.Country
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

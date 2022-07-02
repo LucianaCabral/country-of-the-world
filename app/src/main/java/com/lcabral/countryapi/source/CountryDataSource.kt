@@ -1,4 +1,4 @@
-package com.lcabral.countryapi.data
+package com.lcabral.countryapi.source
 
 import com.lcabral.countryapi.model.Country
 

@@ -1,7 +1,8 @@
-package com.lcabral.countryapi.data
+package com.lcabral.countryapi.source
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.lcabral.countryapi.data.CountryService
 import com.lcabral.countryapi.model.Country
 
 class CountryDataSourceImpl(private val countryService: CountryService): CountryDataSource {

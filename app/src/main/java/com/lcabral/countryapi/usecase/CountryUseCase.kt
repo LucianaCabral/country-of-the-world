@@ -1,4 +1,4 @@
-package com.lcabral.countryapi.data.usecase
+package com.lcabral.countryapi.usecase
 
 import com.lcabral.countryapi.repository.CountryRepository
 
