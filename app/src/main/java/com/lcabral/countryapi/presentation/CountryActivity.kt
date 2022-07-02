@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcabral.countryapi.R
-import com.lcabral.countryapi.data.CountryService
 import com.lcabral.countryapi.databinding.ActivityCountryBinding
 import com.lcabral.countryapi.model.Country
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_AREA
@@ -28,12 +27,12 @@ import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_REGION
 import com.lcabral.countryapi.viewmodel.CountryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     private lateinit var binding: ActivityCountryBinding
     private val viewModel: CountryViewModel by viewModel()
     private var countryAdapter = CountryAdapter(this)
-    private val countryService = CountryService()
 
     companion object {
         const val EXTRA_COUNTRY = "EXTRA_COUNTRY"
@@ -140,18 +139,18 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
                 return true
             }
         })
-//       searchItem.setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
-//           override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-//               countryAdapter.filter.filter("")
-//               makeText(this@CountryActivity, "Action Collapse", Toast.LENGTH_SHORT).show()
-//               return true
-//           }
-//
-//           override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-//               makeText(this@CountryActivity, "Action Expand", Toast.LENGTH_SHORT).show()
-//               return true
-//           }
-//    })
+       searchItem.setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
+           override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+               countryAdapter.filter.filter("")
+               makeText(this@CountryActivity, "Action Collapse", Toast.LENGTH_SHORT).show()
+               return true
+           }
+
+           override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+               makeText(this@CountryActivity, "Action Expand", Toast.LENGTH_SHORT).show()
+               return true
+           }
+    })
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -165,8 +164,7 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
 //        }
 //        return mdList
 //    }
-//
-//    \AQAW\\\\\\\\\\\qaaaaaw
+////
 //        val flagOffset = 0x1F1E6
 //        val asciiOffset = 0x41
 //        val firstChar = Character.codePointAt(countryCode, 0) - asciiOffset + flagOffset
