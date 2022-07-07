@@ -20,5 +20,5 @@ class CountryService {
 
     suspend fun getCountries(): Response<List<Country>> = countryApi.all()
 
-    suspend fun getCountryDetails() : Response<List<Country>> = countryApi.all()
+    suspend fun getCountryDetails() : Response<List<Country>> = countryApi.getAllCountries()
 }
