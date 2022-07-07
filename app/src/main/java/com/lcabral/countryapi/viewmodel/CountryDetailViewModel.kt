@@ -1,5 +1,8 @@
 package com.lcabral.countryapi.viewmodel
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,13 +27,11 @@ class CountryDetailViewModel(
 
     fun fetchCountryDetails() {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = countryDetailsUseCase.invoke()
-
-            if (result.isSuccessful) {
-                withContext(Dispatchers.Main) {
-                    _itemsDetails.value = result.body()
-                }
+            try {
+                val request = _itemsDetails.postValue(countryDetailsUseCase.invoke())
+            } catch (exception: Exception) {
+                Log.d(TAG, exception.toString())
             }
-        }
+        }.start()
     }
 }

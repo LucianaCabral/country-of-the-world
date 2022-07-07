@@ -1,7 +1,8 @@
 package com.lcabral.countryapi.repository
 
 import com.lcabral.countryapi.data.CountryService
+import com.lcabral.countryapi.source.CountryDetailsDataSource
 
-class CountryDetailsRepository(private val countryService: CountryService) {
-     suspend fun getCountryDetails() = countryService.getCountryDetails()
+class CountryDetailsRepository(private val countryDetailsDataSource: CountryDetailsDataSource) {
+     suspend fun getCountryDetails() = countryDetailsDataSource.getDetailsCountries()
     }
