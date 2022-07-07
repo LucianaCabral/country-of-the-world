@@ -9,5 +9,5 @@ interface CountryApi {
     suspend fun all(): Response<List<Country>>
 
     @GET("all?fields=name")
-    suspend fun getAllCountries(): List<Country>
+    suspend fun getAllCountries(): Response<List<Country>>
 }
