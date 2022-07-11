@@ -6,11 +6,5 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.widget.SearchView"
-        android:title="@string/search_"/>
-    <item
-        android:id="@+id/save"
-        android:title="@string/save"/>
-    <item
-        android:id="@+id/delete"
-        android:title="@string/delete"/>
+        android:title="@string/search"/>
 </menu>

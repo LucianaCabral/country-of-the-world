@@ -12,10 +12,8 @@
     <string name="capital_label">Capital: %s</string>
     <string name="area_label">Area: %s km²</string>
     <string name="search">search</string>
-    <string name="search_">Search</string>
     <string name="save">save</string>
     <string name="delete">delete</string>
-    <string name="search_of_the_country">search of the country</string>
 
     <string-array name="population_suffices">
         <item>K</item>
