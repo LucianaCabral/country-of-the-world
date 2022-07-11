@@ -62,7 +62,7 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     }
 
     private fun setupObservers() {
-        viewModel.items.observe(this, Observer { countries ->
+        viewModel.countries.observe(this, Observer { countries ->
             countries?.let {
                 if (countries.isNotEmpty()) {
                     updateList(it)
@@ -107,21 +107,6 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.save -> {
-            makeText(this, "Save item", Toast.LENGTH_SHORT).show()
-            true
-        }
-
-        R.id.delete -> {
-            makeText(this, "deletes", Toast.LENGTH_SHORT).show()
-            true
-        }
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
 
@@ -129,48 +114,19 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
         val searchView = searchItem.actionView as SearchView
 
         searchView.imeOptions = IME_ACTION_DONE
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
             }
 
-            override fun onQueryTextChange(query: String?): Boolean {
-                countryAdapter.filter.filter(query)
-                return true
+            override fun onQueryTextChange(newText: String): Boolean {
+                countryAdapter.run { filter.filter(newText) }
+                return false
             }
         })
-       searchItem.setOnActionExpandListener(object: MenuItem.OnActionExpandListener {
-           override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-               countryAdapter.filter.filter("")
-               makeText(this@CountryActivity, "Action Collapse", Toast.LENGTH_SHORT).show()
-               return true
-           }
-
-           override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-               makeText(this@CountryActivity, "Action Expand", Toast.LENGTH_SHORT).show()
-               return true
-           }
-    })
-        return super.onCreateOptionsMenu(menu)
+        return true
     }
-
-//    private fun getCountries(): MutableList<Country> {
-//        val mdList = mutableListOf<Country>()
-//        for(countryISO in Locale.getISOCountries()) {
-//            val locale = Locale("", countryISO)
-//            if(locale.displayCountry.isNotEmpty()) {
-//                mdList.add(Country(locale.displayCountry + countryFlag(countryISO)))
-//            }
-//        }
-//        return mdList
-//    }
-////
-//        val flagOffset = 0x1F1E6
-//        val asciiOffset = 0x41
-//        val firstChar = Character.codePointAt(countryCode, 0) - asciiOffset + flagOffset
-//        val secondChar = Character.codePointAt(countryCode, 1) - asciiOffset + flagOffset
-//        return (String(Character.toChars(firstChar)) + String(Character.toChars(secondChar)))
-//    }
 }
 
 

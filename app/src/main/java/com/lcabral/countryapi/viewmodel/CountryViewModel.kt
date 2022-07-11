@@ -1,21 +1,20 @@
 package com.lcabral.countryapi.viewmodel
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lcabral.countryapi.usecase.CountryUseCase
 import com.lcabral.countryapi.model.Country
+import com.lcabral.countryapi.usecase.CountryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CountryViewModel(private val countryUseCase: CountryUseCase) : ViewModel() {
-    private val _items = MutableLiveData<List<Country>>()
+    private val _countries = MutableLiveData<List<Country>>()
 
-    val items: LiveData<List<Country>>
-        get() = _items
+    val countries: LiveData<List<Country>>
+        get() = _countries
 
     fun init() {
         fetchCountries()
@@ -24,10 +23,14 @@ class CountryViewModel(private val countryUseCase: CountryUseCase) : ViewModel()
     fun fetchCountries() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                _items.postValue(countryUseCase.invoke())
-            } catch (exception: Exception) {
-                Log.d(TAG, exception.toString())
+                _countries.postValue(countryUseCase.invoke())
+            } catch (error:Throwable) {
+                error.message
+            } finally {
+               withContext(Dispatchers.Main) {
+                   _countries.postValue(countryUseCase.invoke())
+               }
             }
-        }.start()
+        }
     }
 }
