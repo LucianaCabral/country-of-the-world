@@ -12,11 +12,6 @@ class CountryAdapter(private val onItemClickListenerCountry: ItemClickListenerCo
     RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
 
     private val countryList = ArrayList<Country>()
-    var countryFilterList = countryList
-
-    init {
-        countryFilterList = ArrayList(countryList)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)

@@ -12,17 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcabral.countryapi.R
 import com.lcabral.countryapi.databinding.ActivityCountryBinding
 import com.lcabral.countryapi.model.Country
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_AREA
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CAPITAL
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CODE
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CURRENCY_CODE
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CURRENCY_NAM
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CURRENCY_SYMBOL
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_FLAGS
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_NAME
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_NATIVE_NAME
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_POPULATION
-import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_REGION
 import com.lcabral.countryapi.viewmodel.CountryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -94,17 +83,6 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
         val intent = Intent(this, CountryDetailActivity::class.java)
         country.apply {
             intent.putExtra(EXTRA_COUNTRY, country)
-            intent.putExtra(EXTRA_FLAGS, flags.svg)
-            intent.putExtra(EXTRA_NAME, name)
-            intent.putExtra(EXTRA_NATIVE_NAME, nativeName)
-            intent.putExtra(EXTRA_CAPITAL, capital)
-            intent.putExtra(EXTRA_POPULATION, population)
-            intent.putExtra(EXTRA_REGION, region)
-            intent.putExtra(EXTRA_CURRENCY_NAM,currency.toString())
-            intent.putExtra(EXTRA_CURRENCY_CODE,currency.toString())
-            intent.putExtra(EXTRA_CURRENCY_SYMBOL,currency.toString())
-            intent.putExtra(EXTRA_AREA, area)
-            intent.putExtra(EXTRA_CODE, code)
             startActivity(intent)
         }
     }
