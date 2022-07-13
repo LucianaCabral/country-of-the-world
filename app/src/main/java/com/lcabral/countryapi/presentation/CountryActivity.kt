@@ -2,14 +2,10 @@ package com.lcabral.countryapi.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
 import android.widget.SearchView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
-import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +15,9 @@ import com.lcabral.countryapi.model.Country
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_AREA
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CAPITAL
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CODE
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CURRENCY_CODE
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CURRENCY_NAM
+import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_CURRENCY_SYMBOL
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_FLAGS
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_NAME
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_NATIVE_NAME
@@ -27,16 +25,15 @@ import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA
 import com.lcabral.countryapi.presentation.CountryDetailActivity.Companion.EXTRA_REGION
 import com.lcabral.countryapi.viewmodel.CountryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
     private lateinit var binding: ActivityCountryBinding
     private val viewModel: CountryViewModel by viewModel()
     private var countryAdapter = CountryAdapter(this)
 
+
     companion object {
         const val EXTRA_COUNTRY = "EXTRA_COUNTRY"
-        const val TAG = "Tag"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +65,9 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
                     updateList(it)
                     Toast.makeText(this, "success", LENGTH_LONG).show()
                     loadingVisibility(false)
+                    searchListDisplay(it)
+                } else{
+                    throw Exception("error")
                 }
             }
         })
@@ -86,7 +86,7 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
         binding.progressbar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    override fun itemClickCountry(country: Country) {
+    override fun itemClickListenerCountry(country: Country) {
         extras(country)
     }
 
@@ -100,35 +100,36 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
             intent.putExtra(EXTRA_CAPITAL, capital)
             intent.putExtra(EXTRA_POPULATION, population)
             intent.putExtra(EXTRA_REGION, region)
-            intent.putExtra(EXTRA_CURRENCY_NAM, currency.toString())
+            intent.putExtra(EXTRA_CURRENCY_NAM,currency.toString())
+            intent.putExtra(EXTRA_CURRENCY_CODE,currency.toString())
+            intent.putExtra(EXTRA_CURRENCY_SYMBOL,currency.toString())
             intent.putExtra(EXTRA_AREA, area)
             intent.putExtra(EXTRA_CODE, code)
             startActivity(intent)
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-
-        val searchItem: MenuItem = menu.findItem(R.id.search_action)
-        val searchView = searchItem.actionView as SearchView
-
-        searchView.imeOptions = IME_ACTION_DONE
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    private fun searchListDisplay(items: List<Country>) {
+        binding.searchAction.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                resultListSearch(query,items)
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                countryAdapter.run { filter.filter(newText) }
+                resultListSearch(newText,items)
                 return false
             }
         })
-        return true
+    }
+
+    private fun resultListSearch(search: String, items: List<Country>) {
+        val listResultSearch: MutableList<Country> = arrayListOf()
+        for (country in items) {
+            if (country.name!!.contains(search, ignoreCase = true)) {
+                listResultSearch.add(country)
+            }
+        }
+        updateList(listResultSearch)
     }
 }
-
-
-
-

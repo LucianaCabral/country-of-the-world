@@ -24,12 +24,8 @@ class CountryViewModel(private val countryUseCase: CountryUseCase) : ViewModel()
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _countries.postValue(countryUseCase.invoke())
-            } catch (error:Throwable) {
+            } catch (error: Throwable) {
                 error.message
-            } finally {
-               withContext(Dispatchers.Main) {
-                   _countries.postValue(countryUseCase.invoke())
-               }
             }
         }
     }

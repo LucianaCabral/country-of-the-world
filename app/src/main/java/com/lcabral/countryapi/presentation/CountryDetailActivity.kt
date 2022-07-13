@@ -28,6 +28,8 @@ class CountryDetailActivity : AppCompatActivity() {
         const val EXTRA_POPULATION: String = "EXTRA_POPULATION"
         const val EXTRA_REGION: String = "EXTRA_REGION"
         const val EXTRA_CURRENCY_NAM: String = "EXTRA_CURRENCY_NAME"
+        const val EXTRA_CURRENCY_CODE: String = "EXTRA_CURRENCY_CODE"
+        const val EXTRA_CURRENCY_SYMBOL: String = "EXTRA_CURRENCY_SYMBOL"
         const val EXTRA_AREA: String = "EXTRA_AREA"
         const val EXTRA_CODE: String = "EXTRA_CODE"
     }
@@ -63,7 +65,7 @@ class CountryDetailActivity : AppCompatActivity() {
         country = intent.getParcelableExtra(EXTRA_COUNTRY)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ResourceType")
     private fun initViews() {
         with(binding) {
             countryName.text = country?.name
@@ -83,9 +85,17 @@ class CountryDetailActivity : AppCompatActivity() {
             region.text = String.format(resources.getString(R.string.region_label), country?.region)
             area.text = String.format(resources.getString(R.string.area_label), country?.area)
 
-            currency.text = String.format(
-                resources.getString(R.string.currency_label),
-                country?.currency?.map { it.code }?.joinToString()
+            currencyName.text = String.format(
+                resources.getString(R.string.currency_label_name),
+                country?.currency?.map { it.name }?.joinToString()
+            )
+            currencyCode.text = String.format(
+                resources.getString(R.string.currency_label_code),
+                country?.currency?.map { it.code}?.joinToString()
+            )
+            currencySymbol.text = String.format(
+                resources.getString(R.string.currency_label_symbol),
+                country?.currency?.map { it.symbol }?.joinToString()
             )
         }
     }

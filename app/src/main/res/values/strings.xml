@@ -8,12 +8,21 @@
     <string name="country_label">Country: %s</string>
     <string name="population_label">Population: %s</string>
     <string name="region_label">Region: %s</string>
-    <string name="currency_label">Currency code: %s</string>
+
     <string name="capital_label">Capital: %s</string>
     <string name="area_label">Area: %s km²</string>
     <string name="search">search</string>
     <string name="save">save</string>
     <string name="delete">delete</string>
+    <string name="currency_label_code">Currency code: %s</string>
+    <string name="currency_label_name">Currency name: %s</string>
+    <string name="currency_label_symbol">Currency symbol: %s</string>
+
+    <string-array name="currencies" type="array">
+        <item>@string/currency_label_code</item>
+        <item>@string/currency_label_name</item>
+        <item>@string/currency_label_symbol</item>
+    </string-array>
 
     <string-array name="population_suffices">
         <item>K</item>
