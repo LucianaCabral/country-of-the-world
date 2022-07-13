@@ -7,9 +7,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Currency(
     @SerializedName("name")
-    val name: String? = "",
+    val name: String,
     @SerializedName("code")
-    val code: String? = "",
+    val code: String,
     @SerializedName("symbol")
-    val symbol: String? = ""
+    val symbol: String
 ) : Parcelable

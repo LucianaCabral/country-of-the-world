@@ -29,8 +29,8 @@ class CountryDetailViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val request = _itemsDetails.postValue(countryDetailsUseCase.invoke())
-            } catch (exception: Exception) {
-                Log.d(TAG, exception.toString())
+            } catch (error: Throwable) {
+                error.message
             }
         }.start()
     }
