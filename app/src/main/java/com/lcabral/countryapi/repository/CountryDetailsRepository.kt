@@ -1,6 +1,5 @@
 package com.lcabral.countryapi.repository
 
-import com.lcabral.countryapi.data.CountryService
 import com.lcabral.countryapi.source.CountryDetailsDataSource
 
 class CountryDetailsRepository(private val countryDetailsDataSource: CountryDetailsDataSource) {

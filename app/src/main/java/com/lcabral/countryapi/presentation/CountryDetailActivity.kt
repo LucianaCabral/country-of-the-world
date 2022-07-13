@@ -21,16 +21,6 @@ class CountryDetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_COUNTRY: String = "EXTRA_COUNTRY"
-        const val EXTRA_FLAGS: String = "EXTRA_FLAGS"
-        const val EXTRA_NAME: String = "EXTRA_NAME"
-        const val EXTRA_CAPITAL: String = "EXTRA_CAPITAL"
-        const val EXTRA_NATIVE_NAME: String = "EXTRA_NATIVE_NAME"
-        const val EXTRA_POPULATION: String = "EXTRA_POPULATION"
-        const val EXTRA_REGION: String = "EXTRA_REGION"
-        const val EXTRA_CURRENCY_NAM: String = "EXTRA_CURRENCY_NAME"
-        const val EXTRA_CURRENCY_CODE: String = "EXTRA_CURRENCY_CODE"
-        const val EXTRA_CURRENCY_SYMBOL: String = "EXTRA_CURRENCY_SYMBOL"
-        const val EXTRA_AREA: String = "EXTRA_AREA"
         const val EXTRA_CODE: String = "EXTRA_CODE"
     }
 
