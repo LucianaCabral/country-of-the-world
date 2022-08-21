@@ -80,7 +80,6 @@ dependencies {
     testImplementation "org.robolectric:robolectric:4.2.1"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
-    testImplementation "org.hamcrest:hamcrest-all:1.0.0"
     // Koin Core features
     implementation "io.insert-koin:koin-core:2.2.3"
     implementation "io.insert-koin:koin-android:2.2.3"
