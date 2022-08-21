@@ -8,8 +8,8 @@
 Arquitetura utilizada : MVVM
   
   Libs utilizadas:
-* Retrofit para fazer as  requisições HTTP  para uma AP pública.
-* Injeção de dependências com Koin
+* Retrofit para fazer as  requisições HTTP  para uma AP pública.(https://square.github.io/retrofit/)
+* Injeção de dependências com Koin (https://insert-koin.io/docs/setup/v3.2/)
 * Coroutines para gerenciar a chamada assíncrona dessa  requisição HTTP e definir
   em quias threads devem ser executadas
 * Teste Unitários (https://cursokotlin.com/testing-en-android-test-unitarios/)
