@@ -4,7 +4,6 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lcabral.countryapi.model.Country
 import com.lcabral.countryapi.repository.CountryRepository
 import com.lcabral.countryapi.usecase.CountryUseCase
-import com.nhaarman.mockitokotlin2.verify
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -40,7 +39,7 @@ class CountryUseCaseTest {
 
             getCountryUseCase.invoke()
             //Then
-            verify(countryRepository).getFromDataSourceCountries()
+            coVerify { countryRepository.getFromDataSourceCountries() }
         }
 
     @Test
@@ -67,5 +66,4 @@ class CountryUseCaseTest {
         coVerify(exactly = 1) { countryRepository.getFromDataSourceCountries() }
         assert(response==mockList)
     }
-
 }
