@@ -2,8 +2,8 @@ package com.lcabral.countryapi.presentation.viewmodel
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.lcabral.countryapi.model.Country
-import com.lcabral.countryapi.usecase.CountryUseCase
+import com.lcabral.countryapi.data.model.Country
+import com.lcabral.countryapi.domain.usecase.CountryUseCase
 import com.lcabral.countryapi.viewmodel.CountryViewModel
 import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK

@@ -7,11 +7,12 @@ import android.widget.SearchView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcabral.countryapi.R
 import com.lcabral.countryapi.databinding.ActivityCountryBinding
-import com.lcabral.countryapi.model.Country
+import com.lcabral.countryapi.data.model.Country
 import com.lcabral.countryapi.viewmodel.CountryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -109,5 +110,23 @@ class CountryActivity : AppCompatActivity(), ItemClickListenerCountry {
             }
         }
         updateList(listResultSearch)
+    }
+
+    private fun goToMoviesDetails(country: Country) {
+        val intent = CountryDetailActivity.getIntent(
+            context = this, CountryDetailActivity.CountryArgs(
+                name = country.name.orEmpty(),
+                area = country.area.orEmpty(),
+                code = country.code.orEmpty(),
+                capital = country.capital.orEmpty(),
+                flag = country.flag.orEmpty(),
+                nativeName = country.nativeName.orEmpty(),
+                population = country.population!!,
+                currency = country.currency.orEmpty(),
+                flags = country.flags,
+                region = country.region.orEmpty()
+            )
+        )
+        startActivity(intent)
     }
 }

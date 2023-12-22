@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.lcabral.countryapi.databinding.ItemListBinding
-import com.lcabral.countryapi.model.Country
+import com.lcabral.countryapi.data.model.Country
 
 class CountryAdapter(private val onItemClickListenerCountry: ItemClickListenerCountry) :
     RecyclerView.Adapter<CountryAdapter.ViewHolder>() {

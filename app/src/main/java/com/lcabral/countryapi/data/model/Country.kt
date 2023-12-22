@@ -1,4 +1,4 @@
-package com.lcabral.countryapi.model
+package com.lcabral.countryapi.data.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

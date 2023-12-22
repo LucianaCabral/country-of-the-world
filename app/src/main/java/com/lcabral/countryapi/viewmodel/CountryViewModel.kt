@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lcabral.countryapi.model.Country
-import com.lcabral.countryapi.usecase.CountryUseCase
+import com.lcabral.countryapi.data.model.Country
+import com.lcabral.countryapi.domain.usecase.CountryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CountryViewModel(private val countryUseCase: CountryUseCase) : ViewModel() {
+class CountryViewModel(
+    private val countryUseCase: CountryUseCase) : ViewModel() {
     private val _countries = MutableLiveData<List<Country>>()
 
     val countries: LiveData<List<Country>>

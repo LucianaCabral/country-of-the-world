@@ -1,9 +1,9 @@
 package com.lcabral.usecase
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import com.lcabral.countryapi.model.Country
-import com.lcabral.countryapi.repository.CountryRepository
-import com.lcabral.countryapi.usecase.CountryUseCase
+import com.lcabral.countryapi.data.model.Country
+import com.lcabral.countryapi.domain.repository.CountryRepository
+import com.lcabral.countryapi.domain.usecase.CountryUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -16,7 +16,7 @@ import org.junit.Test
 class CountryUseCaseTest {
 
     private val countryRepository: CountryRepository = mockk(relaxed = true)
-    private lateinit var getCountryUseCase : CountryUseCase
+    private lateinit var getCountryUseCase: CountryUseCase
     private val mockList: List<Country> = listOf(
         mockk(relaxed = true),
         mockk(relaxed = true),
@@ -24,7 +24,7 @@ class CountryUseCaseTest {
     )
 
     @get:Rule
-    val rule : InstantTaskExecutorRule = InstantTaskExecutorRule()
+    val rule: InstantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
@@ -35,7 +35,7 @@ class CountryUseCaseTest {
     @Test
     fun `CountryUsecase Should returns a list of country When Repository returns success`(): Unit =
         runBlocking {
-            coEvery {countryRepository.getFromDataSourceCountries() } returns mockList
+            coEvery { countryRepository.getFromDataSourceCountries() } returns mockList
 
             getCountryUseCase.invoke()
             //Then
@@ -64,6 +64,6 @@ class CountryUseCaseTest {
 
         // Then
         coVerify(exactly = 1) { countryRepository.getFromDataSourceCountries() }
-        assert(response==mockList)
+        assert(response == mockList)
     }
 }

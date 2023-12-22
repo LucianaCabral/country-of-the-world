@@ -1,13 +1,12 @@
 package com.lcabral.countryapi.repository
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import com.lcabral.countryapi.model.Country
-import com.lcabral.countryapi.source.CountryDataSource
-import com.lcabral.countryapi.usecase.CountryUseCase
+import com.lcabral.countryapi.data.model.Country
+import com.lcabral.countryapi.data.source.CountryDataSource
+import com.lcabral.countryapi.domain.repository.CountryRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -43,7 +42,7 @@ class CountryRepositoryTest {
     @Test
     fun ` getFromDataSourceCountries catch`(): Unit = runBlocking {
         // Given
-        coEvery { dataSource.getAllCountries() } returns
+        coEvery { dataSource.getAllCountries() } returns mockList
 
         // When
         countryRepository.getFromDataSourceCountries()

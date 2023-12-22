@@ -7,15 +7,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lcabral.countryapi.model.Country
-import com.lcabral.countryapi.repository.CountryDetailsRepository
-import com.lcabral.countryapi.usecase.CountryDetailsUseCase
+import com.lcabral.countryapi.data.model.Country
+import com.lcabral.countryapi.domain.repository.CountryDetailsRepository
+import com.lcabral.countryapi.domain.usecase.CountryDetailsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CountryDetailViewModel(
-    private val countryDetailsUseCase: CountryDetailsUseCase) : ViewModel() {
+    private val countryDetailsUseCase: CountryDetailsUseCase
+) : ViewModel() {
     private val _itemsDetails = MutableLiveData<List<Country>>()
 
     val itemDetails: LiveData<List<Country>>

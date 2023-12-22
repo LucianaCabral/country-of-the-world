@@ -1,6 +1,6 @@
-package com.lcabral.countryapi.usecase
+package com.lcabral.countryapi.domain.usecase
 
-import com.lcabral.countryapi.repository.CountryRepository
+import com.lcabral.countryapi.domain.repository.CountryRepository
 
 class CountryUseCase(private val countryRepository: CountryRepository) {
  suspend operator fun invoke() = countryRepository.getFromDataSourceCountries()

@@ -1,28 +1,52 @@
 package com.lcabral.countryapi.presentation
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.lcabral.countryapi.R
-import com.lcabral.countryapi.data.CountryService
 import com.lcabral.countryapi.databinding.ActivityCountryDetailBinding
-import com.lcabral.countryapi.model.Country
+import com.lcabral.countryapi.data.model.Country
+import com.lcabral.countryapi.data.model.Currency
+import com.lcabral.countryapi.data.model.Flags
 import com.lcabral.countryapi.viewmodel.CountryDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.NumberFormat
 import java.util.*
+import kotlinx.parcelize.Parcelize
 
+private const val ARGS_COUNTRY = "argsCountry"
 class CountryDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCountryDetailBinding
     private val countryDetailsViewModel: CountryDetailViewModel by viewModel()
     private var country: Country? = null
-    private val countryService = CountryService()
 
     companion object {
         const val EXTRA_COUNTRY: String = "EXTRA_COUNTRY"
-        const val EXTRA_CODE: String = "EXTRA_CODE"
+
+        fun getIntent(context: Context, args: CountryArgs): Intent {
+            return Intent(context, CountryDetailActivity::class.java).apply {
+                putExtra(ARGS_COUNTRY, args)
+            }
+        }
     }
+
+    @Parcelize
+    data class CountryArgs(
+        val name: String,
+        val flags: Flags,
+        val flag: String,
+        val capital: String,
+        val population: Long,
+        val region: String,
+        val currency: List<Currency>,
+        val area: String,
+        val code:String,
+        val nativeName: String
+    ): Parcelable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,21 +58,12 @@ class CountryDetailActivity : AppCompatActivity() {
 
         getExtras()
         initUI()
-        setupObservers()
         this.setupBackButton()
     }
 
     override fun onResume() {
         super.onResume()
         countryDetailsViewModel.init()
-    }
-
-    private fun setupObservers() {
-        countryDetailsViewModel.fetchCountryDetails()
-        countryDetailsViewModel.itemDetails.observe(this) { countriesDetails ->
-            countriesDetails?.let {
-            }
-        }
     }
 
     private fun getExtras() {
@@ -77,15 +92,15 @@ class CountryDetailActivity : AppCompatActivity() {
 
             currencyName.text = String.format(
                 resources.getString(R.string.currency_label_name),
-                country?.currency?.map { it.name }?.joinToString()
+                country?.currency?.joinToString { it.name }
             )
             currencyCode.text = String.format(
                 resources.getString(R.string.currency_label_code),
-                country?.currency?.map { it.code}?.joinToString()
+                country?.currency?.joinToString { it.code }
             )
             currencySymbol.text = String.format(
                 resources.getString(R.string.currency_label_symbol),
-                country?.currency?.map { it.symbol }?.joinToString()
+                country?.currency?.joinToString { it.symbol }
             )
         }
     }
@@ -110,5 +125,7 @@ class CountryDetailActivity : AppCompatActivity() {
         finish()
         return true
     }
+
+
 }
 

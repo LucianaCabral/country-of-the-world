@@ -1,6 +1,6 @@
 package com.lcabral.countryapi.data
 
-import com.lcabral.countryapi.model.Country
+import com.lcabral.countryapi.data.model.Country
 import retrofit2.Response
 import retrofit2.http.GET
 
